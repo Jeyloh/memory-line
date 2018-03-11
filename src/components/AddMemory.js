@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styled from 'styled-components'
+import styled, {css} from 'styled-components'
 import DatePicker from "./DatePickerImpl"
 
 class AddMemory extends Component {
@@ -28,7 +28,7 @@ class AddMemory extends Component {
         </FlexContainerCol>
         }
         <ButtonContainerFlex>
-        <Button onClick={ () => {this.setState({showForm: !this.state.showForm})}}>
+        <Button redColor={this.state.showForm} onClick={ () => {this.setState({showForm: !this.state.showForm})}}>
           {this.state.showForm ? <span>Hide</span> : <span>Add Memory</span>}
         </Button>
         { this.state.showForm &&
@@ -43,6 +43,25 @@ class AddMemory extends Component {
 export default AddMemory;
 
 
+const sizes = {
+  giant: 1170,
+  desktop: 992,
+  tablet: 768,
+  phone: 376
+}
+
+// iterate through the sizes and create a media template
+export const media = Object.keys(sizes).reduce((accumulator, label) => {
+  // use em in breakpoints to work properly cross-browser and support users
+  // changing their browsers font-size: https://zellwk.com/blog/media-query-units/
+  const emSize = sizes[label] / 16
+  accumulator[label] = (...args) => css`
+    @media (max-width: ${emSize}em) {
+      ${css(...args)}
+    }
+  `
+  return accumulator
+}, {})
 
 const Inline = styled.div`
   display: inline;
@@ -71,7 +90,7 @@ const Wrapper = styled.div`
 const Button = styled.button`
   padding: 10px;
   width: 100%;
-  background-color: #2A2A2A;
+  background-color: ${props => props.redColor ? "red" : "#2A2A2A"};
   color: white;
   border: 1px solid white;
   border-radius: 5px;
@@ -103,6 +122,9 @@ const DescriptionInput = styled.textarea`
 const FlexContainerCol = styled.div`
   display: flex;
   flex-direction: row;
+  ${media.giant`
+  flex-direction: column;
+  `}
   justify-content: space-around;
   padding: 20px;
 `;
