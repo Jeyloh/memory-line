@@ -4,23 +4,23 @@ import styled from "styled-components"
 import { ROUTE } from "../const/index"
 import WelcomePage from "../pages/WelcomePage"
 import HomePage from "../pages/HomePage"
+import { observer } from 'mobx-react'
+
 
 class PageRouter extends React.Component {
 
-
   render() {
+    const {authStore} = this.props;
 
-    return (
-        <Switch>
-          <Route exact path={ROUTE.ROOT} component={WelcomePage} />
-          <Route exact path={ROUTE.HOMEPAGE} component={HomePage} />
-          <Route render={ () => (
-            <ErrorMessage>
-              Ops, nothing here :)
-            </ErrorMessage>
-          )} />
-        </Switch>
-    )
+    if (!authStore.user) {
+      return (
+        <WelcomePage loginUser={authStore.login} />
+      )
+    } else {
+      return (
+        <HomePage user={authStore.user} token={authStore.token} logoutUser={authStore.logoutUser} />
+      )
+    }
   }
 }
 
@@ -28,5 +28,5 @@ const ErrorMessage = styled.div`
   color: black;
 `;
 
-export default PageRouter;
+export default observer(PageRouter);
 
