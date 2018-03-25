@@ -4,32 +4,46 @@ import Header from "../components/Header"
 import AddMemory from "../components/AddMemory"
 import TimelineWrapper from "../components/Timeline"
 import credentials from "../firebase/credentials/client"
+import { observer } from 'mobx-react/index'
+import { memoryStore } from "../mobx/MemoryStore"
+import axios from 'axios/index'
 
 
 class HomePage extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
-
+    this.state = {
+      events: null
+    }
   }
+
   static defaultProps = {
     calClientId: credentials.clientId,
     gApiKey: credentials.apiKey
   }
 
-  getCalendarEvents = () => {
-    fetch("")
-      .then( result => {
-        this.setState({
-          events: result.data
-        })
+  getCalendarList = () => {
+    axios.get(`/api/getCalendarList/${this.props.accessToken}`).then(res => {
+      console.table(res);
+      const allEvents = res.data.calendarEvents.items;
+      console.log("exampleEvent: ", allEvents[0])
+      this.setState({
+        events: allEvents.slice(0, 10) // 10 first events
       })
-      .catch( err => {
-        console.error(err);
-      })
+      console.log("SUCCESS FETCHING CALENDAR LIST");
+    }).catch((err) => {
+      console.error(err)
+    })
   }
 
   componentDidMount = () => {
+    this.getCalendarList();
+  }
+
+  componentDidReceiveProps() {
+    this.setState({
+      events: memoryStore.calendarList
+    })
   }
 
   render() {
@@ -38,14 +52,14 @@ class HomePage extends Component {
         <Header onClick={() => this.props.logoutUser}/>
         <Width>
           <AddMemory />
-          { this.state.events && <TimelineWrapper cKey={this.props.calendarKey}/> }
+          { this.state.events ? <TimelineWrapper events={this.state.events}/> : <div>Loading</div>}
         </Width>
       </Wrapper>
     );
   }
 }
 
-export default HomePage;
+export default observer(HomePage);
 
 const Wrapper = styled.div`
   display: flex;

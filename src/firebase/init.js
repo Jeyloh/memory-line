@@ -4,11 +4,12 @@ import config from "./credentials/client"
 firebase.initializeApp(config);
 
 const provider = new firebase.auth.GoogleAuthProvider();
-const auth = firebase.auth()
+provider.addScope("https://www.googleapis.com/auth/calendar");
+const auth = firebase.auth();
 auth.useDeviceLanguage();
 
 const fdb = firebase.database();
-const routines = firebase.database().ref('routines');
+const memories = firebase.database().ref('memories');
 const users = firebase.database().ref('users');
 
 export {fdb, auth, provider};

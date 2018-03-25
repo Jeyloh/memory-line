@@ -5,7 +5,7 @@ class AuthStore {
   constructor() {
     extendObservable(this, {
       user: null,
-      token: null
+      accessToken: null
     });
 
     // auth.onAuthStateChanged(user => {
@@ -15,19 +15,7 @@ class AuthStore {
     // })
   }
 
-  login = () => {
-    fetch("/api/accessToken").then(res => {
-      console.table(res)
-      fetch('https://www.googleapis.com/calendar/v3/users/me/calendarList/primary', {
-        method: 'GET',
-        headers: {
-          'Authorization': "Bearer ya29.c.Elt9BYVESzAtv1L97tfE0Ubu9a4ZJxsB6AwuYA0xN6zWz7z6f3uWh8pMTjQ9e5yhRgVvG43nTCDAK7K-Q5N4hRahLl39sWllkuOmASdakkno2rSKn_LgZZ_LLiBu"
-        }
-      }).catch(() => {
-        console.log("failure")
-      })
-    })
-  }
+
 
   loginUser = async () => {
     console.log("@action login user");
@@ -35,7 +23,8 @@ class AuthStore {
     auth.signInWithPopup(provider)
       .then( result => {
         // This gives you a Google Access Token. You can use it to access the Google API.
-        this.token = result.credential.accessToken;
+        this.accessToken = result.credential.accessToken;
+        console.log(result.credential.accessToken);
         // The signed-in user info.
         this.user = result.user;
       })

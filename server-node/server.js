@@ -10,8 +10,9 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
+const serverCredentials = require('../src/firebase/credentials/server');
 const firebase = admin.initializeApp({
-  credential: admin.credential.cert(require('../src/firebase/credentials/server')),
+  credential: admin.credential.cert(serverCredentials),
   databaseURL: ''
 }, 'server')
 
@@ -52,14 +53,34 @@ app.prepare()
         .catch((error) => res.json({ error }))
     })
 
-    server.get('/api/accessToken', async (req, res) => {
+    server.get('/api/getCalendarList/:access', async (req, res) => {
       if (!req.body) return res.sendStatus(400)
       else {
-        const accessToken = await googleapi.getAccessToken();
-        console.log(accessToken);
-        return accessToken;
-        // googleapi.getAccessToken()
+        try {
+          const accessToken = req.params.access;
+          const calendarListResponse = await googleapi.getCalendarList(accessToken);
+          console.log("calendarListResponse: ", calendarListResponse);
+
+          try {
+            const events = await googleapi.getCalendarEvents(calendarListResponse.id, accessToken);
+            console.log("events: ", events);
+
+            res.status(200).send({
+              calendarEvents: events,
+              sendHvafaenDuVil: true
+            });
+          } catch (error) {
+            console.log(error);
+            res.status(500).send(error);
+          }
+        } catch (error) {
+          console.log(error);
+          res.status(500).send(error);
+        }
+        // Promise.resolve()
+        //   .then(await googleapi.getAccessToken)
         //   .then( res => {
+        //     console.log("api/accesstoken: ", res);
         //     return res;
         //   })
         //   .catch( (err) => {

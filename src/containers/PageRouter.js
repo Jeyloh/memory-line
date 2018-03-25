@@ -10,15 +10,18 @@ import { observer } from 'mobx-react'
 class PageRouter extends React.Component {
 
   render() {
-    const {authStore} = this.props;
+    const {authStore, memoryStore} = this.props;
 
     if (!authStore.user) {
       return (
-        <WelcomePage loginUser={authStore.login} />
+        <WelcomePage loginUser={authStore.loginUser} />
       )
     } else {
       return (
-        <HomePage user={authStore.user} token={authStore.token} logoutUser={authStore.logoutUser} />
+        <HomePage user={authStore.user}
+                  accessToken={authStore.accessToken}
+                  memoryStore={memoryStore}
+                  logoutUser={authStore.logoutUser} />
       )
     }
   }
