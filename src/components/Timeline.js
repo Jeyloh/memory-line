@@ -3,10 +3,31 @@ import { VerticalTimeline, VerticalTimelineElement, WorkIcon, SchoolIcon }  from
 import 'react-vertical-timeline-component/style.min.css';
 
 
-const TimelineWrapper = () => {
-
+const TimelineWrapper = ({events}) => {
+  // TODO: Map events from Firebase here aswell as calendar
   return (
     <VerticalTimeline>
+      {
+        events.map( object => {
+          const createDate = object.start.dateTime
+            ? `${object.start.dateTime.substring(0, 4)} - ${object.end.dateTime.substring(0, 4)}`
+            : null;
+          return (
+            <VerticalTimelineElement
+              className="vertical-timeline-element--work"
+              date={createDate ? createDate : "start - end"}
+              iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+              icon={WorkIcon}
+            >
+              <h3 className="vertical-timeline-element-title">{object.summary}</h3>
+              <h4 className="vertical-timeline-element-subtitle">Subtitle</h4>
+              <p>
+                Desc: {object.description}
+              </p>
+            </VerticalTimelineElement>
+          )
+        })
+      }
       <VerticalTimelineElement
         className="vertical-timeline-element--work"
         date="2011 - present"

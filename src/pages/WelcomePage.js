@@ -3,21 +3,24 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components'
 import Header from "../components/Header"
 import { Link } from "react-router-dom"
-const WelcomeSection = () => {
 
-  return (
-    <ContentWrapper>
-      <Header />
-      <WelcomeText>Hi. Welcome to MemoryL|ne, the application for you who want to store
-      your memories forever! Your unified portal to lookup all your memories and
-      easily enjoy them.</WelcomeText>
-      <ButtonWrapper>
-        <Link to="/home"><TemptingButton>Login</TemptingButton></Link>
-        <TemptingButton>Do</TemptingButton>
-        <TemptingButton>Stuff</TemptingButton>
-      </ButtonWrapper>
-    </ContentWrapper>
-  )
+class WelcomeSection extends React.Component {
+
+  render() {
+    return (
+      <ContentWrapper>
+        <Header />
+        <WelcomeText>Hi. Welcome to MemoryL|ne, the application for you who want to store
+          your memories forever! Your unified portal to lookup all your memories and
+          easily enjoy them.</WelcomeText>
+        <ButtonWrapper>
+          <Link to="/home"><TemptingButton>Login</TemptingButton></Link>
+          <TemptingButton onClick={this.props.loginUser}>Do</TemptingButton>
+          <TemptingButton>Stuff</TemptingButton>
+        </ButtonWrapper>
+      </ContentWrapper>
+    )
+  }
 }
 
 export default WelcomeSection;
