@@ -1,18 +1,20 @@
 import {fdb, auth, provider} from '../firebase/init'
 import { extendObservable } from 'mobx'
+import axios from 'axios/index'
 
 class AuthStore {
   constructor() {
     extendObservable(this, {
       user: null,
-      accessToken: null
+      accessToken: sessionStorage.getItem("aT") ? sessionStorage.getItem("aT") : null
     });
 
-    // auth.onAuthStateChanged(user => {
-    //   if (user) {
-    //     this.user = user;
-    //   }
-    // })
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        console.log(user);
+        this.user = user;
+      }
+    })
   }
 
 
@@ -24,6 +26,7 @@ class AuthStore {
       .then( result => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         this.accessToken = result.credential.accessToken;
+        sessionStorage.setItem("aT", result.credential.accessToken);
         console.log(result.credential.accessToken);
         // The signed-in user info.
         this.user = result.user;

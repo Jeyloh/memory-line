@@ -16,8 +16,16 @@ handleError = (reject, error) => {
 // https://firebase.google.com/docs/database/admin/retrieve-data
 exports.setupAsyncMemoryList = (userId) => {
   const usersMemories = db.ref(`memories/${userId}`);
-  usersMemories.on("value", snapshot => {
-    console.log(snapshot.val());
+  return new Promise( (resolve, reject) => {
+
+    usersMemories.on("value", snapshot => {
+      console.log(snapshot.val());
+    }).then(res => {
+      resolve(res);
+    }).catch(err => {
+      console.log(err);
+      reject(err);
+    })
   })
 }
 

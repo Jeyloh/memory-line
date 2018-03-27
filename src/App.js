@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter } from "react-router-dom"
-import { authStore } from "./mobx/user.store"
+import { authStore } from "./mobx/AuthStore"
 import { memoryStore } from "./mobx/MemoryStore"
 import PageRouter from "./containers/PageRouter"
 

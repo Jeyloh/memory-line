@@ -38,6 +38,7 @@ class HomePage extends Component {
 
   componentDidMount = () => {
     this.getCalendarList();
+    this.props.memoryStore.getGoogleCalendarEvents()
   }
 
   componentDidReceiveProps() {
