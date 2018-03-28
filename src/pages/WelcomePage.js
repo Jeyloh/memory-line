@@ -14,9 +14,9 @@ class WelcomeSection extends React.Component {
           your memories forever! Your unified portal to lookup all your memories and
           easily enjoy them.</WelcomeText>
         <ButtonWrapper>
-          <Link to="/home"><TemptingButton>Login</TemptingButton></Link>
-          <TemptingButton onClick={this.props.loginUser}>Do</TemptingButton>
-          <TemptingButton>Stuff</TemptingButton>
+          <TemptingButton onClick={this.props.loginUser}>Google Login</TemptingButton>
+          <TemptingButton>About</TemptingButton>
+          <TemptingButton>Contribute</TemptingButton>
         </ButtonWrapper>
       </ContentWrapper>
     )

@@ -1,4 +1,5 @@
 body {
+  min-height: 100vh;
   background: #994fad; /* Old browsers */
   background: -moz-linear-gradient(-45deg, #994fad 0%, #3960d6 70%, #3960d6 70%, #3960d6 100%); /* FF3.6-15 */
   background: -webkit-linear-gradient(-45deg, #994fad 0%,#3960d6 70%,#3960d6 70%,#3960d6 100%); /* Chrome10-25,Safari5.1-6 */
@@ -7,8 +8,10 @@ body {
   padding: 20px;
 }
 
-.react-datepicker-wrapper {
+.react-datepicker-wrapper input {
   margin-bottom: 20px;
+  padding: 8px 6px;
+  cursor: pointer;
 }
 
 .title-pop-shadow {
@@ -38,3 +41,4 @@ body {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+

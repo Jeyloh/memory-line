@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter } from "react-router-dom"
-import { authStore } from "./mobx/AuthStore"
-import { memoryStore } from "./mobx/MemoryStore"
+import store from "./mobx/index"
 import PageRouter from "./containers/PageRouter"
 
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <PageRouter authStore={authStore} memoryStore={memoryStore}/>
+        <PageRouter store={store} />
       </BrowserRouter>
     );
   }

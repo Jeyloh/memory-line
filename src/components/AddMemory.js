@@ -13,7 +13,6 @@ class AddMemory extends Component {
   render() {
     return (
       <Wrapper>
-        { this.state.showForm &&
         <FlexContainerCol>
           <NewMemoryForm>
             <Inline>Date: <DatePicker /></Inline>
@@ -26,15 +25,7 @@ class AddMemory extends Component {
           </div>
 
         </FlexContainerCol>
-        }
-        <ButtonContainerFlex>
-        <Button redColor={this.state.showForm} onClick={ () => {this.setState({showForm: !this.state.showForm})}}>
-          {this.state.showForm ? <span>Hide</span> : <span>Add Memory</span>}
-        </Button>
-        { this.state.showForm &&
-          <Button>Post memory</Button>
-        }
-        </ButtonContainerFlex>
+        <Button>Post memory</Button>
       </Wrapper>
     );
   }
@@ -84,7 +75,6 @@ const Wrapper = styled.div`
   width: 100%;
   border-radius: 5px;
   margin-top: 10px;
-
 `;
 
 const Button = styled.button`
@@ -105,25 +95,41 @@ const NewMemoryForm = styled.form `
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 60%;
+  align-items: flex-start;
+  
+  ${media.giant`
+  align-items: center;
+  `}
+  width: 80%;
 `;
 const WideInput = styled.input`
-  width: 100%;
+  width: 80%;
   margin-bottom: 20px;
   padding: 6px 12px;
+  border: 2px solid white;
+  border-radius: 3px;
+  background-color: transparent;
+  color: white;
 `;
 const DescriptionInput = styled.textarea`
-  width: 100%;
+  width: 80%;
   height: 20em;
   margin-bottom: 20px;
   padding: 6px 12px;
   resize: vertical;
+  border: 2px solid white;
+  outline: none;
+  border-radius: 3px;
+  background-color: transparent;
+  color: white;
 `;
+
 const FlexContainerCol = styled.div`
   display: flex;
   flex-direction: row;
   ${media.giant`
   flex-direction: column;
+  align-items: center;
   `}
   justify-content: space-around;
   padding: 20px;

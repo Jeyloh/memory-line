@@ -9,12 +9,14 @@ class AuthStore {
       accessToken: sessionStorage.getItem("aT") ? sessionStorage.getItem("aT") : null
     });
 
-    auth.onAuthStateChanged(user => {
-      if (user) {
-        console.log(user);
-        this.user = user;
-      }
-    })
+    if (sessionStorage.getItem("aT")) {
+      auth.onAuthStateChanged(user => {
+        if (user) {
+          console.log(user);
+          this.user = user;
+        }
+      })
+    }
   }
 
 

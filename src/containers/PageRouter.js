@@ -3,14 +3,14 @@ import { Switch, Route} from "react-router-dom"
 import styled from "styled-components"
 import { ROUTE } from "../const/index"
 import WelcomePage from "../pages/WelcomePage"
-import HomePage from "../pages/HomePage"
+import MemoriesPage from "../pages/MemoriesPage"
 import { observer } from 'mobx-react'
 
 
 class PageRouter extends React.Component {
 
   render() {
-    const {authStore, memoryStore} = this.props;
+    const {authStore, memoryStore, interfaceStore} = this.props.store;
 
     if (!authStore.user) {
       return (
@@ -18,10 +18,9 @@ class PageRouter extends React.Component {
       )
     } else {
       return (
-        <HomePage user={authStore.user}
-                  accessToken={authStore.accessToken}
-                  memoryStore={memoryStore}
-                  logoutUser={authStore.logoutUser} />
+        <MemoriesPage interfaceStore={interfaceStore} 
+                      authStore={authStore}
+                      memoryStore={memoryStore} />
       )
     }
   }

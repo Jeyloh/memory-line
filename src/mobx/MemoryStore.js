@@ -1,22 +1,28 @@
 import {fdb, auth, provider} from '../firebase/init'
 import { extendObservable, action, computed, decorate } from 'mobx'
 import axios from "axios";
-import AuthStore from "./AuthStore"
+import {authStore} from "./AuthStore"
 
 class MemoryStore {
   constructor() {
     extendObservable(this, {
+      newMemoryForm: {
+          title: "",
+          description: "",
+          date: "",
+          imageSrc: ""
+      },
       calendarList: null,
-      get authorizedUser() { return AuthStore.user },
-      get currentUserToken() { return AuthStore.accessToken }
+      get authorizedUser() { return authStore.user },
+      get currentUserToken() { return authStore.accessToken }
     });
   }
 
   subscribeMemoryChanges = async () => {
     const uid = this.authorizedUser().currentUser.uid ? this.authorizedUser().currentUser.uid : auth.currentUser.uid;
-    if (!uid) throw error("No user logged in");
+    if (!uid) throw ("No user logged in");
     try {
-      const memoryList = await axios.get(`/api/get-async-memory-list/${userId}`);
+      const memoryList = await axios.get(`/api/get-async-memory-list/${uid}`);
     } catch (err) {
       console.error(err)
     }
@@ -39,13 +45,14 @@ class MemoryStore {
     debugger;
     console.log(auth);
     const userId = auth.currentUser.uid;
-    axios.get(`/api/get-async-memory-list/${userId}`).then(res => {
+    axios.get(`/api/getCalendarList/${authStore.accessToken}`).then(res => {
       console.table(res);
       const allEvents = res.data.calendarEvents.items;
       console.log(allEvents[0])
-      this.calendarList = allEvents;
+      this.calendarList = allEvents.slice(0, 10);
       console.log("SUCCESS FETCHING CALENDAR LIST");
     }).catch((err) => {
+      console.error(err);
     })
   }
 }
