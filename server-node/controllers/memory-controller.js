@@ -15,7 +15,6 @@ exports.getAsyncMemoryList = async (req, res) => {
 }
 
 exports.addMemory = async (req, res) => {
-  if (!req.body) return res.sendStatus(400)
   try {
     console.log(req.body);
     const requestBody = req.body;
@@ -30,7 +29,8 @@ exports.addMemory = async (req, res) => {
     const addMemoryResponse = await service.addMemory(newMemoryModel);
     console.log("response: ", addMemoryResponse);
     res.status(200).send({
-      message: "Memory was added"
+      message: "Memory was added",
+      newMemory: addMemoryResponse
     })
   } catch (err) {
     console.log(err);

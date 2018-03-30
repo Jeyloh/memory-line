@@ -7,51 +7,56 @@ class MemoryStore {
   constructor() {
     extendObservable(this, {
       newMemoryForm: {
-          title: "",
-          description: "",
-          date: "",
-          imageSrc: ""
+        title: "",
+        description: "",
+        date: "",
+        imageSrc: ""
       },
       calendarList: null,
+      memoryList: null,
       get authorizedUser() { return authStore.user },
       get currentUserToken() { return authStore.accessToken }
     });
   }
 
   subscribeMemoryChanges = async () => {
-    const uid = this.authorizedUser().currentUser.uid ? this.authorizedUser().currentUser.uid : auth.currentUser.uid;
+    const uid = this.authorizedUser.uid;
     if (!uid) throw ("No user logged in");
     try {
-      const memoryList = await axios.get(`/api/get-async-memory-list/${uid}`);
+      const response = await axios.get(`/memory/get-async-memory-list/${uid}`);
+      debugger;
+      return this.memoryList = response.data.memoryList;
     } catch (err) {
-      console.error(err)
+      return console.error(err)
+
     }
   }
 
-  addMemory = async () => {
-    const headers = {
-      "Content-Type": "application/json"
-    }
-    const userId = auth.currentUser.uid;
+  addMemory = async (memoryFormObj) => {
+    const data = memoryFormObj;
+    const uid = this.authorizedUser.uid;
+    if (!uid) throw ("No user logged in");
     try {
-      const addedMemory = await axios.post(`/api/add-memory/jorgenlybeck`, headers)
+      return await axios.post(`/memory/add-memory/${uid}`,
+        data)
     } catch (err) {
       console.error(err)
+      return err;
     }
 
   }
 
   getGoogleCalendarEvents = () => {
     debugger;
-    console.log(auth);
-    const userId = auth.currentUser.uid;
-    axios.get(`/api/getCalendarList/${authStore.accessToken}`).then(res => {
-      console.table(res);
-      const allEvents = res.data.calendarEvents.items;
-      console.log(allEvents[0])
-      this.calendarList = allEvents.slice(0, 10);
-      console.log("SUCCESS FETCHING CALENDAR LIST");
-    }).catch((err) => {
+    const accessToken = this.currentUserToken;
+    axios.get(`/calendar/get-events/${accessToken}`)
+      .then(res => {
+        console.table(res);
+        const allEvents = res.data.calendarEvents.items;
+        console.log(allEvents[0])
+        this.calendarList = allEvents.slice(0, 10);
+        console.log("SUCCESS FETCHING CALENDAR LIST");
+      }).catch((err) => {
       console.error(err);
     })
   }

@@ -25,12 +25,6 @@ const ToolBar = ({interfaceStore, authStore}) => {
 
 export default observer(ToolBar);
 
-const tempCheckbox = (
-    <RadioContainer class="styled-input-single">
-    <RadioInput type="checkbox" id="radio-one" />
-    <RadioLabel for="radio-example-one">add memory</RadioLabel>
-</RadioContainer>
-)
 
 const ToolBarWrapper = styled.div`
 background: rgba(0, 0, 0, 0.2);
@@ -73,7 +67,7 @@ const ToggleButton = styled.button`
     border-radius: 5px;
     background: transparent;
     color: white;
-    margin: 15px;
+    margin-left: 15px;
 `;
 
 const LogoutButton = styled.button`
@@ -84,7 +78,7 @@ const LogoutButton = styled.button`
     color: white;
     font-weight: 600;
     box-shadow: 0 2px 3px #ccc;
-    margin: 15px;
+    margin-right: 15px;
 
 `;
 

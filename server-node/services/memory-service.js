@@ -17,15 +17,17 @@ handleError = (reject, error) => {
 exports.setupAsyncMemoryList = (userId) => {
   const usersMemories = db.ref(`memories/${userId}`);
   return new Promise( (resolve, reject) => {
+    try {
+      usersMemories.on("value", snapshot => {
+        console.log("Async operation started")
+        console.log(snapshot.val());
+        resolve(snapshot.val());
+      })
+    } catch (error) {
+      reject(error);
+    }
 
-    usersMemories.on("value", snapshot => {
-      console.log(snapshot.val());
-    }).then(res => {
-      resolve(res);
-    }).catch(err => {
-      console.log(err);
-      reject(err);
-    })
+
   })
 }
 
@@ -33,15 +35,15 @@ exports.addMemory = (newMemoryObj) => {
   console.log(`addMemory ${newMemoryObj.userId}`)
   const memoryUserRef = db.ref(`memories/${newMemoryObj.userId}`);
   const newMemoryOnUserRef = memoryUserRef.push();
-  return new Promise( (resolve, reject) => {
+  return new Promise( async (resolve, reject) => {
     newMemoryOnUserRef.set(newMemoryObj)
-      .then( (res) => {
-        handleSuccess(resolve, res);
-      }).catch( (error) => {
-      handleError(reject, error)
-    })
-  }).catch((err) => {
-    console.log(err);
+      .then( () => {
+        resolve(newMemoryObj);
+      })
+      .catch ( err => {
+        console.log(err);
+        reject(err);
+      })
   })
 }
 

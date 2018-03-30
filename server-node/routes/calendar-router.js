@@ -11,7 +11,7 @@ router.get('/get-access-token', async (req, res) => {
     res.send(error);
   }
 })
-router.get('/get-events', async (req, res) => {
+router.get('/get-events/:access', async (req, res) => {
   try {
     const asyncMemory = await controller.getGoogleCalendarEvents(req, res);
     res.send(asyncMemory);

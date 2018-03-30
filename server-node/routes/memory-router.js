@@ -10,8 +10,10 @@ router.get('/get-async-memory-list/:userId', async (req, res) => {
 
 
 // About page route.
-router.post('/api/add-memory/:userId', function (req, res) {
-  res.send('About this wiki');
+router.post('/add-memory/:userId', async (req, res) => {
+  // if (!req.body) return res.sendStatus(400)
+  const memoryAddedResponse = await controller.addMemory(req, res);
+  res.send(memoryAddedResponse);
 })
 
 

@@ -19,18 +19,7 @@ app.prepare()
   .then(() => {
     const app = express();
 
-    app.use(helmet());
-
-    // Setup routes
-    app.use('/calendar', calendarRouter);
-    app.use('/auth', authRouter);
-    app.use('/memory', memoryRouter);
-
-
-    // server.use(bodyParser.json())
-    app.use(bodyParser.json())
-    app.use(bodyParser.urlencoded({ extended: true }));
-
+    // Setup session (?)
     app.use(session({
       secret: 'geheimnis',
       saveUninitialized: true,
@@ -41,6 +30,7 @@ app.prepare()
       cookie: { maxAge: 604800000 } // week
     }))
 
+    // Initialize firebase
     app.use((req, res, next) => {
       req.firebaseServer = firebase.initializeApp;
       res.header("Access-Control-Allow-Origin", "*");
@@ -48,10 +38,24 @@ app.prepare()
       next()
     })
 
+    // Logger middleware
+    app.use(helmet());
+
+    // server.use(bodyParser.json())
+    app.use(bodyParser.json())
+    app.use(bodyParser.urlencoded({ extended: true }));
+
+    // Setup routes
+    app.use('/calendar', calendarRouter);
+    app.use('/auth', authRouter);
+    app.use('/memory', memoryRouter);
+
+    // Handle other routes
     app.get('*', (req, res) => {
       return handle(req, res)
     })
 
+    // Start app on port
     app.listen(port, (err) => {
       if (err) throw err
       console.log(`> Ready on http://localhost:${port}`)
