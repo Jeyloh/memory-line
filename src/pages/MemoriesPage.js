@@ -9,6 +9,13 @@ import Toolbar from "../components/Toolbar"
 import moment from "moment"
 
 class MemoriesPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      counterFrom: 0,
+      counterTo: 10
+    }
+  }
 
   componentDidMount = () => {
     this.props.memoryStore.getGoogleCalendarEvents();
@@ -16,6 +23,19 @@ class MemoriesPage extends Component {
       .then(() => {
         this.forceUpdate();
       });
+
+    const self = this;
+    window.onscroll = function(ev) {
+      console.log(window.innerHeight + window.scrollY, " ", document.body.offsetHeight);
+      const suggestions = self.props.interfaceStore.showCalendarSuggestions
+      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && suggestions) {
+        // you're at the bottom of the page
+        let count = self.state.counterTo + 10;
+        self.setState({
+          counterTo: count
+        })
+      }
+    };
   }
 
   addSuggestionToForm = (object) => {
@@ -35,7 +55,10 @@ class MemoriesPage extends Component {
   render() {
     const { interfaceStore, authStore, memoryStore } = this.props;
 
-    const calendarList = memoryStore.calendarList;
+
+    const calendarList = memoryStore.calendarList
+      ? memoryStore.calendarList.slice(this.state.counterFrom, this.state.counterTo)
+      : null;
     const memoryList = memoryStore.memoryList;
 
     return (

@@ -61,7 +61,7 @@ class MemoryStore {
         console.table(res);
         const allEvents = res.data.calendarEvents.items;
         console.log(allEvents[0])
-        this.calendarList = allEvents.slice(0, 10);
+        this.calendarList = allEvents;
         console.log("SUCCESS FETCHING CALENDAR LIST");
       }).catch((err) => {
         console.error(err);
