@@ -32,12 +32,15 @@ class AddMemory extends Component {
                 <Label>From</Label>
                 <DatePicker
                   name="startDateTime"
+                  showTimeSelect
+                  dateFormat="LL"
                   selected={addMemoryForm.startDateTime}
                   onChange={(date) => this.handleDateChange("startDateTime", date)}
                 />
                 <Label>To</Label>
                 <DatePicker
                   name="endDateTime"
+                  dateFormat="LL"
                   selected={addMemoryForm.endDateTime}
                   onChange={(date) => this.handleDateChange("endDateTime", date)}
                 />

@@ -33,6 +33,8 @@ class InterfaceStore {
   fillFormWithSuggestions = (suggestionObj) => {
     this.showAddMemoryForm = true;
     this.addMemoryForm = suggestionObj;
+    window.document.body.scrollTop = 0; // For Safari
+    window.document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   }
 
   toggleCalendarSuggestions = () => {

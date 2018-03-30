@@ -6,7 +6,7 @@ import LoadingContainer from "../components/LoadingContainer"
 import TimelineWrapper from "../components/Timeline"
 import { observer } from 'mobx-react/index'
 import Toolbar from "../components/Toolbar"
-
+import moment from "moment"
 
 class MemoriesPage extends Component {
 
@@ -19,13 +19,16 @@ class MemoriesPage extends Component {
   }
 
   addSuggestionToForm = (object) => {
+    const startDateTime = moment(object.start.dateTime, "YYYY-MM-DDTHH:mm:ss.SSSZ", true);
+    const endDateTime = moment(object.end.dateTime, "YYYY-MM-DDTHH:mm:ss.SSSZ", true);
     const suggestionObject = {
       title: object.summary,
       description: object.description,
-      startDateTime: object.start.dateTime,
-      endDateTime: object.end.dateTime,
+      startDateTime: startDateTime,
+      endDateTime: endDateTime,
       imageSrc: ""
     }
+    debugger;
     this.props.interfaceStore.fillFormWithSuggestions(suggestionObject)
   }
 
