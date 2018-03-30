@@ -1,6 +1,5 @@
-import {fdb, auth, provider} from '../firebase/init'
+import {auth, provider} from '../firebase/init'
 import { extendObservable } from 'mobx'
-import axios from 'axios/index'
 
 class AuthStore {
   constructor() {
@@ -33,15 +32,9 @@ class AuthStore {
         // The signed-in user info.
         this.user = result.user;
       })
-      .catch( error => {
+      .catch( err => {
         // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        const credential = error.credential;
-        console.error(error);
+        console.error(err);
       });
   }
 
@@ -53,6 +46,7 @@ class AuthStore {
         return null;
       })
       .catch( err => {
+        console.error(err);
         return null;
       })
   }

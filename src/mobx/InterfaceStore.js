@@ -1,7 +1,13 @@
-import {fdb, auth, provider} from '../firebase/init'
 import { extendObservable } from 'mobx'
-import axios from 'axios/index'
 import moment from 'moment';
+
+const memoryFormModel = {
+  title: "",
+  description: "",
+  startDateTime: moment(),
+  endDateTime: moment(),
+  imageSrc: ""
+};
 
 class InterfaceStore {
   constructor() {
@@ -9,11 +15,7 @@ class InterfaceStore {
         showAddMemoryForm: false,
         showDate: false,
         showCalendarSuggestions: false,
-        addMemoryForm: {
-          title: "",
-          date: moment(),
-          description: ""
-        },
+        addMemoryForm: memoryFormModel,
     });
   }
 
@@ -24,14 +26,19 @@ class InterfaceStore {
   toggleAddMemoryForm = () => {
     this.showAddMemoryForm = !this.showAddMemoryForm;
   }
+  resetForm = () => {
+    this.addMemoryForm = memoryFormModel;
+  }
+
+  fillFormWithSuggestions = (suggestionObj) => {
+    this.showAddMemoryForm = true;
+    this.addMemoryForm = suggestionObj;
+  }
 
   toggleCalendarSuggestions = () => {
     this.showCalendarSuggestions = !this.showCalendarSuggestions;
   }
 
-  toggleDate = () => {
-    this.showDate = !this.showDate;
-  }
 }
 
 export const interfaceStore = new InterfaceStore();

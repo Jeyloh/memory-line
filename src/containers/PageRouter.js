@@ -1,7 +1,4 @@
 import React from "react"
-import { Switch, Route} from "react-router-dom"
-import styled from "styled-components"
-import { ROUTE } from "../const/index"
 import WelcomePage from "../pages/WelcomePage"
 import MemoriesPage from "../pages/MemoriesPage"
 import { observer } from 'mobx-react'
@@ -26,9 +23,6 @@ class PageRouter extends React.Component {
   }
 }
 
-const ErrorMessage = styled.div`
-  color: black;
-`;
 
 export default observer(PageRouter);
 

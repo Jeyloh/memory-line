@@ -11,7 +11,7 @@ router.get('/get-async-memory-list/:userId', async (req, res) => {
 
 // About page route.
 router.post('/add-memory/:userId', async (req, res) => {
-  // if (!req.body) return res.sendStatus(400)
+  if (!req.body) return res.sendStatus(400)
   const memoryAddedResponse = await controller.addMemory(req, res);
   res.send(memoryAddedResponse);
 })

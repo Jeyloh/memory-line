@@ -9,8 +9,6 @@ const auth = firebase.auth();
 auth.useDeviceLanguage();
 
 const fdb = firebase.database();
-const memories = firebase.database().ref('memories');
-const users = firebase.database().ref('users');
 
 export {fdb, auth, provider};
 

@@ -1,49 +1,56 @@
-import {fdb, auth, provider} from '../firebase/init'
-import { extendObservable, action, computed, decorate } from 'mobx'
+import { extendObservable} from 'mobx'
 import axios from "axios";
 import {authStore} from "./AuthStore"
+import {interfaceStore} from "./InterfaceStore"
+import { fdb } from "../firebase/init"
 
 class MemoryStore {
   constructor() {
     extendObservable(this, {
-      newMemoryForm: {
-        title: "",
-        description: "",
-        date: "",
-        imageSrc: ""
-      },
       calendarList: null,
       memoryList: null,
       get authorizedUser() { return authStore.user },
-      get currentUserToken() { return authStore.accessToken }
+      get currentUserToken() { return authStore.accessToken },
+      get toggleAddMemoryForm() { return interfaceStore.toggleAddMemoryForm },
+      get resetForm() { return interfaceStore.resetForm; }
     });
   }
 
   subscribeMemoryChanges = async () => {
     const uid = this.authorizedUser.uid;
-    if (!uid) throw ("No user logged in");
-    try {
-      const response = await axios.get(`/memory/get-async-memory-list/${uid}`);
-      debugger;
-      return this.memoryList = response.data.memoryList;
-    } catch (err) {
-      return console.error(err)
+    if (!uid) throw new Error("No user logged in");
+    // try {
+    //   const response = await axios.get(`/memory/get-async-memory-list/${uid}`);
+    //   debugger;
+    //   return this.memoryList = response.data.memoryList;
+    // } catch (err) {
+    //   return console.error(err)
+    // }
+    const usersMemories = fdb.ref(`memories/${uid}`);
 
-    }
+    try {
+        usersMemories.on("value", snapshot => {
+          console.log("Async operation started")
+          console.log(snapshot.val());
+          this.memoryList = snapshot.val();
+        })
+      } catch (error) {
+        throw new Error(error);
+      }
   }
 
   addMemory = async (memoryFormObj) => {
     const data = memoryFormObj;
     const uid = this.authorizedUser.uid;
-    if (!uid) throw ("No user logged in");
+    if (!uid) throw new Error("No user logged in");
     try {
-      return await axios.post(`/memory/add-memory/${uid}`,
-        data)
+      await axios.post(`/memory/add-memory/${uid}`, data);
+      this.resetForm();
+      this.toggleAddMemoryForm();
     } catch (err) {
       console.error(err)
       return err;
     }
-
   }
 
   getGoogleCalendarEvents = () => {
@@ -57,7 +64,7 @@ class MemoryStore {
         this.calendarList = allEvents.slice(0, 10);
         console.log("SUCCESS FETCHING CALENDAR LIST");
       }).catch((err) => {
-      console.error(err);
+        console.error(err);
     })
   }
 }

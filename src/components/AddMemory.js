@@ -17,8 +17,8 @@ class AddMemory extends Component {
     e.preventDefault();
     this.props.interfaceStore.updateAddMemoryForm(e.target.name, e.target.value)
   }
-  handleDateChange = (date) => {
-    this.props.interfaceStore.updateAddMemoryForm("date", date)
+  handleDateChange = (name, date) => {
+    this.props.interfaceStore.updateAddMemoryForm(name, date)
   }
 
   render() {
@@ -28,11 +28,18 @@ class AddMemory extends Component {
         <NewMemoryForm onSubmit={(e) => {this.addMemory(e, addMemoryForm)}}>
           <Row>
             <TextColumn>
-              <DateInput>Date:
+              <DateInput>
+                <Label>From</Label>
                 <DatePicker
-                  name="date"
-                  selected={addMemoryForm.date}
-                  onChange={this.handleDateChange}
+                  name="startDateTime"
+                  selected={addMemoryForm.startDateTime}
+                  onChange={(date) => this.handleDateChange("startDateTime", date)}
+                />
+                <Label>To</Label>
+                <DatePicker
+                  name="endDateTime"
+                  selected={addMemoryForm.endDateTime}
+                  onChange={(date) => this.handleDateChange("endDateTime", date)}
                 />
               </DateInput>
               <WideInput name="title"
@@ -88,8 +95,16 @@ export const media = Object.keys(sizes).reduce((accumulator, label) => {
   return accumulator
 }, {})
 
+const Label = styled.div`
+`;
+
 const DateInput = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
   margin-bottom: 20px;
+  width: 100%;
 `;
 const ImageDropper = styled.div`
   width: 250px;
@@ -100,10 +115,7 @@ const ImageDropper = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const ButtonContainerFlex = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
+
 const Wrapper = styled.div`
   background: rgba(0, 0, 0, 0.2);
   color: white;

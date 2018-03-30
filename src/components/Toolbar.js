@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components'
 import { observer } from 'mobx-react/index'
 
@@ -80,56 +80,4 @@ const LogoutButton = styled.button`
     box-shadow: 0 2px 3px #ccc;
     margin-right: 15px;
 
-`;
-
-const RadioContainer = styled.section`
-position: relative;
-padding: 20px 0 20px 40px;
-text-align: left;
-margin: 0 20px;
-`;
-
-const RadioInput = styled.input`
-position: absolute;
-top: 0;
-left: -9999px;
-visibility: hidden;
-
-&:checked + label {
-&:before {
-}
-&:after {
-  transform: translate3d(0, 0, 0);
-  opacity: 1;
-}
-}
-`;
-
-const RadioLabel = styled.label`
-cursor: pointer;
-&:before,
-&:after {
-content: '';
-position: absolute;
-top: 50%;
-border-radius: 50%;
-}
-&:before {
-left: 0;
-width: 30px;
-height: 30px;
-margin: -15px 0 0;
-background: #f7f7f7;
-box-shadow: 0 0 1px grey;
-}
-&:after {
-left: 5px;
-width: 20px;
-height: 20px;
-margin: -10px 0 0;
-opacity: 0;
-background: #37b2b2;
-transform: translate3d(-40px, 0, 0) scale(0.5);
-transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
-}
 `;

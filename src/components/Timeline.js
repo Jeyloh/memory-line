@@ -1,9 +1,10 @@
 import React from 'react'
-import { VerticalTimeline, VerticalTimelineElement, WorkIcon, SchoolIcon }  from 'react-vertical-timeline-component';
+import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 
+let WorkIcon, SchoolIcon = null;
 
-const TimelineWrapper = ({memories, calendarList, showSuggestions}) => {
+const TimelineWrapper = ({memories, calendarList, showSuggestions, addIntoForm}) => {
   // TODO: Map events from Firebase here aswell as calendar
 
   function returnValues(obj) {
@@ -18,13 +19,16 @@ const TimelineWrapper = ({memories, calendarList, showSuggestions}) => {
     <VerticalTimeline>
       {
         returnValues(memories).map( object => {
+          const createDate = object.startDateTime
+            ? `${object.startDateTime} - ${object.endDateTime}`
+            : null;
           return (
             <VerticalTimelineElement
               key={object.date}
               className="vertical-timeline-element--work"
-              date={object.date ? object.date : "start : end"}
+              date={createDate ? createDate : "start - end"}
               iconStyle={{ background: 'pink', color: '#fff' }}
-              icon={WorkIcon}
+              icon={SchoolIcon}
             >
               <h3 className="vertical-timeline-element-title">{object.title}</h3>
               <h4 className="vertical-timeline-element-subtitle">Subtitle</h4>
@@ -34,7 +38,7 @@ const TimelineWrapper = ({memories, calendarList, showSuggestions}) => {
             </VerticalTimelineElement>
           )
         })}
-      { showSuggestions &&
+      { showSuggestions && calendarList &&
       calendarList.map( object => {
         const createDate = object.start.dateTime
           ? `${object.start.dateTime} - ${object.end.dateTime}`
@@ -52,6 +56,7 @@ const TimelineWrapper = ({memories, calendarList, showSuggestions}) => {
             <p>
               Desc: {object.description}
             </p>
+            <button onClick={() => addIntoForm(object)}>Set in form</button>
           </VerticalTimelineElement>
         )
       })

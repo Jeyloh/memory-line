@@ -18,6 +18,17 @@ class MemoriesPage extends Component {
       });
   }
 
+  addSuggestionToForm = (object) => {
+    const suggestionObject = {
+      title: object.summary,
+      description: object.description,
+      startDateTime: object.start.dateTime,
+      endDateTime: object.end.dateTime,
+      imageSrc: ""
+    }
+    this.props.interfaceStore.fillFormWithSuggestions(suggestionObject)
+  }
+
   render() {
     const { interfaceStore, authStore, memoryStore } = this.props;
 
@@ -35,6 +46,7 @@ class MemoriesPage extends Component {
           {memoryList
             ? <TimelineWrapper memories={memoryList}
                                calendarList={calendarList}
+                               addIntoForm={this.addSuggestionToForm}
                                showSuggestions={interfaceStore.showCalendarSuggestions}/>
             : <LoadingContainer/>
           }

@@ -11,9 +11,7 @@ body {
 .react-datepicker-wrapper input {
   padding: 8px 6px;
   cursor: pointer;
-  width: 100%;
 }
-
 
 .title-pop-shadow {
   animation:  glow 3s ease-in-out;
