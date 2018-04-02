@@ -1,8 +1,7 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
 
-src/firebase/credentials/server.js
-src/firebase/credentials/client.js
+src/firebase/credentials/*
 
 # dependencies
 /node_modules
