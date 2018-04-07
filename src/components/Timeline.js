@@ -70,9 +70,9 @@ const TimelineWrapper = ({memories, calendarList, showSuggestions, addIntoForm})
 
 export default TimelineWrapper
 
-const AddSuggestionButton = styled.button`
-  position: absolute;
-  display: block;
-  width: 100%;
-  padding: 15px;
-`;
+// const AddSuggestionButton = styled.button`
+//   position: absolute;
+//   display: block;
+//   width: 100%;
+//   padding: 15px;
+// `;
