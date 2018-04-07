@@ -6,7 +6,7 @@ const firebase = require("../firebase-init");
 
 // Use the JWT client to generate an access token.
 exports.getAccessToken = () => {
-  return new Promise( resolve => {
+  return new Promise(resolve => {
     firebase.jwtClient.authorize((error, tokens) => {
       if (error) {
         console.log("Error making request to generate access token:", error);
@@ -27,9 +27,13 @@ exports.getAccessToken = () => {
 // Use the JWT client to generate an access token.
 exports.getCalendarList = (accessToken) => {
   const url = "https://www.googleapis.com/calendar/v3/users/me/calendarList/primary";
-  const headers = { "Authorization": `Bearer ${accessToken}`};
+  const headers = {
+    "Authorization": `Bearer ${accessToken}`
+  };
   return new Promise(resolve => {
-    axios.get(url, {headers: headers})
+    axios.get(url, {
+        headers: headers
+      })
       .then(response => {
         console.log(response.data);
         resolve(response.data);
@@ -40,12 +44,17 @@ exports.getCalendarList = (accessToken) => {
       });
   })
 }
+
 // Use the JWT client to generate an access token.
 exports.getCalendarEvents = (calendarId, accessToken) => {
   const url = `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events`;
-  const headers = { "Authorization": `Bearer ${accessToken}`};
+  const headers = {
+    "Authorization": `Bearer ${accessToken}`
+  };
   return new Promise(resolve => {
-    axios.get(url, {headers: headers})
+    axios.get(url, {
+        headers: headers
+      })
       .then(response => {
         console.log(response.data);
         resolve(response.data);

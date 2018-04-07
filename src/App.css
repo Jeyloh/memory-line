@@ -9,12 +9,15 @@ body {
 }
 
 .suggestion-opaque>div>div {
-  background: rgba(255, 255, 255, 0.5)!important;
+  background: rgba(95, 35, 35, 0.5)!important;
   transition: background 300ms;
   border: 2px solid white;
 }
 .suggestion-opaque>div>div:hover {
   background: rgba(255, 255, 255)!important;
+}
+.vertical-timeline-element-date {
+  color: white;
 }
 
 .react-datepicker-wrapper input {

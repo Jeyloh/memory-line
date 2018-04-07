@@ -12,7 +12,9 @@ const firebase = require('./firebase-init')
 
 const port = parseInt(process.env.PORT, 10) || 3001
 const dev = process.env.NODE_ENV !== 'production'
-const app = next({ dev })
+const app = next({
+  dev
+})
 const handle = app.getRequestHandler()
 
 app.prepare()
@@ -23,11 +25,16 @@ app.prepare()
     app.use(session({
       secret: 'geheimnis',
       saveUninitialized: true,
-      store: new FileStore({path: '/tmp/sessions', secret: 'geheimnis'}),
+      store: new FileStore({
+        path: '/tmp/sessions',
+        secret: 'geheimnis'
+      }),
       resave: false,
       rolling: true,
       httpOnly: true,
-      cookie: { maxAge: 604800000 } // week
+      cookie: {
+        maxAge: 604800000
+      } // week
     }))
 
     // Initialize firebase
@@ -43,7 +50,9 @@ app.prepare()
 
     // server.use(bodyParser.json())
     app.use(bodyParser.json())
-    app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(bodyParser.urlencoded({
+      extended: true
+    }));
 
     // Setup routes
     app.use('/calendar', calendarRouter);

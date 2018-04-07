@@ -31,10 +31,12 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "deploy": "git push heroku master",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "server": "nodemon server-node/server.js",
-    "format": "prettier-eslint \"src/**/*.js\""
+    "format": "prettier-eslint \"src/**/*.js\"",
+    "heroku-postbuild": "npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "proxy": "http://localhost:3001/",
   "devDependencies": {

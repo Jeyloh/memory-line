@@ -1,12 +1,12 @@
-const admin = require('firebase-admin')
+const admin = require("firebase-admin");
 const google = require("googleapis");
 
-const serviceAccount = require('../src/firebase/credentials/admin');
+const serviceAccount = require("../src/firebase/credentials/admin");
 
 const firebaseApp = admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: 'https://diary-chain.firebaseio.com/'
-})
+  databaseURL: "https://diary-chain.firebaseio.com/"
+});
 
 const db = admin.database();
 
@@ -24,7 +24,6 @@ const jwtClient = new google.google.auth.JWT(
   serviceAccount.private_key,
   scopes
 );
-
 
 exports = {
   firebaseApp,
