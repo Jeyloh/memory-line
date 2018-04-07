@@ -7,6 +7,7 @@
     "@blueprintjs/datetime": "^2.0.0",
     "axios": "^0.18.0",
     "body-parser": "^1.18.2",
+    "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "firebase": "^4.10.1",
@@ -29,12 +30,13 @@
     "styled-components": "^3.2.0"
   },
   "scripts": {
-    "server": "react-scripts start",
+    "prestart": "dotenv/config",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "deploy": "git push heroku master",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "start": "node server-node/server.js",
+    "server": "nodemon server-node/server.js",
     "format": "prettier-eslint \"src/**/*.js\"",
     "heroku-postbuild": "npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },

@@ -8,14 +8,19 @@ const authRouter = require('./routes/auth-router')
 const calendarRouter = require('./routes/calendar-router')
 const memoryRouter = require('./routes/memory-router')
 
-const firebase = require('./firebase-init')
 
 const port = parseInt(process.env.PORT, 10) || 3001
 const dev = process.env.NODE_ENV !== 'production'
+
+if (dev)
+  require('dotenv').config()
+  
 const app = next({
   dev
 })
 const handle = app.getRequestHandler()
+
+const firebase = require('./firebase-init')
 
 app.prepare()
   .then(() => {
