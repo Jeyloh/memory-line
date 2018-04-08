@@ -1,5 +1,5 @@
 import firebase from 'firebase';
-import config from "./credentials/client"
+import config from "./credentials/client.js"
 
 firebase.initializeApp(config);
 

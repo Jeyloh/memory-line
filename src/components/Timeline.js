@@ -1,7 +1,7 @@
 import React from 'react'
 import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
-import styled from 'styled-components'
+// import styled from 'styled-components'
 
 let WorkIcon, SchoolIcon = null;
 
@@ -70,9 +70,9 @@ const TimelineWrapper = ({memories, calendarList, showSuggestions, addIntoForm})
 
 export default TimelineWrapper
 
-const AddSuggestionButton = styled.button`
-  position: absolute;
-  display: block;
-  width: 100%;
-  padding: 15px;
-`;
+// const AddSuggestionButton = styled.button`
+//   position: absolute;
+//   display: block;
+//   width: 100%;
+//   padding: 15px;
+// `;
