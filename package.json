@@ -2,6 +2,19 @@
   "name": "ddiary-chain",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "deploy": "git push heroku master",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "server": "nodemon server-node/server.js",
+    "format": "prettier-eslint \"src/**/*.js\"",
+    "heroku-postbuild": "npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+  },
+  "cacheDirectories": [
+    "node_modules"
+  ],
   "dependencies": {
     "@blueprintjs/core": "^2.0.1",
     "@blueprintjs/datetime": "^2.0.0",
@@ -28,16 +41,6 @@
     "react-vertical-timeline-component": "^2.0.5",
     "session-file-store": "^1.2.0",
     "styled-components": "^3.2.0"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "deploy": "git push heroku master",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "server": "nodemon server-node/server.js",
-    "format": "prettier-eslint \"src/**/*.js\"",
-    "heroku-postbuild": "npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "proxy": "http://localhost:3001/",
   "devDependencies": {
