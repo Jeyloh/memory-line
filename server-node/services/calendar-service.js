@@ -1,5 +1,5 @@
 const axios = require('axios');
-const firebase = require("../firebase-init");
+const firebase = require("../firebase-setup/index");
 
 //TODO: Implement from here https://firebase.google.com/docs/database/rest/auth
 
