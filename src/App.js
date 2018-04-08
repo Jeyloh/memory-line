@@ -8,7 +8,7 @@ class App extends Component {
 
   componentWillMount = () => {
     if (process.env['NODE_ENV'] !== 'production')
-      document.title = "[DEV] &#x1F31F;Memory Line"
+      document.title = `[DEV] Memory L|ne`
   }
   render() {
     return (
