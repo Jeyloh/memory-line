@@ -1,9 +1,10 @@
 import React from "react";
 import styled, {keyframes} from 'styled-components'
+import spray from "../assets/diamond-icon.png";
 
 const LoadingContainer = () => (
     <Container>
-        <Spinner>[[L]]</Spinner>
+        <Spinner><img src={spray} /></Spinner>
         <LoadingText>Loading text...</LoadingText>
     </Container>
 )
@@ -37,6 +38,11 @@ display: inline-text;
 color: white;
 font-size: 32px;
 animation: ${rotate360} 2s linear infinite;
+
+img {
+    width: 100px;
+    height: 100px;
+}
 `;
 
 

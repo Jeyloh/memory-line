@@ -1,10 +1,14 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   min-height: 100vh;
-  background: #994fad; /* Old browsers */
-  background: -moz-linear-gradient(-45deg, #994fad 0%, #3960d6 70%, #3960d6 70%, #3960d6 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(-45deg, #994fad 0%,#3960d6 70%,#3960d6 70%,#3960d6 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(135deg, #994fad 0%,#3960d6 70%,#3960d6 70%,#3960d6 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#994fad', endColorstr='#3960d6',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  background: #886AD3; /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #886AD3 0%, #38C5C8 70%, #38C5C8 70%, #38C5C8 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, #886AD3 0%,#38C5C8 70%,#38C5C8 70%,#38C5C8 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, #886AD3 0%,#38C5C8 70%,#38C5C8 70%,#886AD3 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#886AD3', endColorstr='#38C5C8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
   padding: 20px;
 }
 
@@ -17,12 +21,18 @@ body {
   background: rgba(255, 255, 255)!important;
 }
 .vertical-timeline-element-date {
-  color: white;
+  color: white!important;
+
 }
 
 .react-datepicker-wrapper input {
   padding: 8px 6px;
   cursor: pointer;
+  background: none;
+  border: 2px solid white;
+  color: white;
+  border-radius: 3px;
+  width: 100%;
 }
 
 .title-pop-shadow {

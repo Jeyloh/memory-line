@@ -63,7 +63,7 @@ class MemoriesPage extends Component {
 
     return (
       <Wrapper>
-        <Header />
+        <Header displayName={authStore.user.displayName}/>
         <Width>
           <Toolbar interfaceStore={interfaceStore} authStore={authStore} />
            { interfaceStore.showAddMemoryForm
@@ -90,8 +90,10 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  min-width: 300px;
+
 `;
 
 const Width = styled.div`
-  width: 80%;
+  width: 100%;
 `;

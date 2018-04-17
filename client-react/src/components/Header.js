@@ -10,7 +10,10 @@ const Header = props => {
       <HeaderTitle className="title-pop-shadow" onClick={() => props.history.push("/")}>
         <HeaderSlogan>a trip down</HeaderSlogan>
         MemoryL|ne
+        {props.displayName && <WelcomeTitle>Welcome {props.displayName}</WelcomeTitle> }
+        
       </HeaderTitle>
+
     </HeaderBar>
   )
 }
@@ -54,4 +57,14 @@ const HeaderSlogan = styled.span`
   position: absolute;
   left: 5em;
   top: 10px;
+`;
+
+const WelcomeTitle = styled.span`
+    position: absolute;
+    right: 1em;
+    top: 10px;
+    font-size: 2px;
+    color: white;
+    font-weight: 300;
+    font-size: .3em;
 `;

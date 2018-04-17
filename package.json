@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "cd client-react && npm run build && cd ../server-node && npm run start && cd ..",
+    "start": "cd ./server-node && npm run start && cd ..",
+    "devstart": "cd client-react && npm run build && cd ../server-node && npm run start && cd ..",
     "devclient": "cd client-react && npm run start",
     "devserver": "cd server-node && npm run dev",
     "install-all": "npm install && cd server-node && npm install && cd ../client-react && npm install && cd ..",

@@ -60,7 +60,9 @@ memory-line/
 ## Usage
 This application is hosted by Heroku and use Firebase features.
 
-The node server is hosting the React apps static files from node-server/index.js
+The node server is hosting the React apps static files from node-server/index.js.
+
+Because of node hosting front end there is no need to proxy requests from client to server, bcs client is server rendered.
 
 ### Scripts
 

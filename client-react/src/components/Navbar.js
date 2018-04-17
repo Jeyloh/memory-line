@@ -4,12 +4,10 @@ import { Link } from "react-router-dom"
 
 const Navbar = () => {
 
-  return (
-    <div>
-      <Link style={LinkStyle} to="/"> Welcome </Link>
+  return [
+      <Link style={LinkStyle} to="/"> Welcome </Link>,
       <Link style={LinkStyle} to="/home"> Mypage </Link>
-    </div>
-  )
+  ]
 }
 
 export default Navbar;

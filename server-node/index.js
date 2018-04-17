@@ -15,9 +15,10 @@ const firebase = require("./firebase-setup/index");
 
 app.get("env");
 
+// Use the static React app as front end
 app.use(express.static(path.join(__dirname, "../client-react/build")));
 
-// Setup session (?)
+// Setup session
 app.use(
   session({
     secret: "geheimnis",

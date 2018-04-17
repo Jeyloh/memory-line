@@ -1,75 +1,84 @@
-import React, { Component } from 'react';
-import { observer } from 'mobx-react';
-import styled, {css} from 'styled-components'
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+import React, { Component } from "react";
+import { observer } from "mobx-react";
+import styled from "styled-components";
+import { media } from "../styles.const";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker-cssmodules.css";
 
 class AddMemory extends Component {
-
   addMemory = (e, memoryFormObj) => {
     e.preventDefault();
-    if (!memoryFormObj)
-      return alert("failed to add");
+    if (!memoryFormObj) return alert("failed to add");
     this.props.addMemory(memoryFormObj);
-  }
+  };
 
-  handleTextChange = (e) => {
+  handleTextChange = e => {
     e.preventDefault();
-    this.props.interfaceStore.updateAddMemoryForm(e.target.name, e.target.value)
-  }
+    this.props.interfaceStore.updateAddMemoryForm(
+      e.target.name,
+      e.target.value
+    );
+  };
+  
   handleDateChange = (name, date) => {
-    this.props.interfaceStore.updateAddMemoryForm(name, date)
-  }
+    this.props.interfaceStore.updateAddMemoryForm(name, date);
+  };
 
   render() {
-    const {addMemoryForm} = this.props.interfaceStore;
+    const { addMemoryForm } = this.props.interfaceStore;
     return (
       <Wrapper>
-        <NewMemoryForm onSubmit={(e) => {this.addMemory(e, addMemoryForm)}}>
+        <NewMemoryForm
+          onSubmit={e => {
+            this.addMemory(e, addMemoryForm);
+          }}
+        >
           <Row>
             <TextColumn>
-              <DateInput>
-                <Label>From</Label>
-                <DatePicker
-                  name="startDateTime"
-                  showTimeSelect
-                  dateFormat="LL"
-                  selected={addMemoryForm.startDateTime}
-                  onChange={(date) => this.handleDateChange("startDateTime", date)}
-                />
-                <Label>To</Label>
-                <DatePicker
-                  name="endDateTime"
-                  dateFormat="LL"
-                  selected={addMemoryForm.endDateTime}
-                  onChange={(date) => this.handleDateChange("endDateTime", date)}
-                />
-              </DateInput>
-              <WideInput name="title"
-                         type="text"
-                         placeholder="Title"
-                         value={addMemoryForm.title}
-                         onChange={(e) => this.handleTextChange(e)}/>
-              <DescriptionInput name="description"
-                                placeholder="Description"
-                                value={addMemoryForm.description}
-                                onChange={(e) => this.handleTextChange(e)}/>
+              <DateWrapper>
+                <DateInput>
+                  <Label>From</Label>
+                  <DatePicker
+                    name="startDateTime"
+                    dateFormat="LL"
+                    selected={addMemoryForm.startDateTime}
+                    onChange={date =>
+                      this.handleDateChange("startDateTime", date)
+                    }
+                  />
+                </DateInput>
+                <DateInput>
+                  <Label>To</Label>
+                  <DatePicker
+                    name="endDateTime"
+                    dateFormat="LL"
+                    selected={addMemoryForm.endDateTime}
+                    onChange={date =>
+                      this.handleDateChange("endDateTime", date)
+                    }
+                  />
+                </DateInput>
+              </DateWrapper>
+              <WideInput
+                name="title"
+                type="text"
+                placeholder="Title"
+                value={addMemoryForm.title}
+                onChange={e => this.handleTextChange(e)}
+              />
+              <DescriptionInput
+                name="description"
+                placeholder="Description"
+                value={addMemoryForm.description}
+                onChange={e => this.handleTextChange(e)}
+              />
             </TextColumn>
-            {media.giant &&
             <ImageDropColumn>
-
-              <ImageDropper>
-                Drop images here
-              </ImageDropper>
+              <ImageDropper>Drop images here</ImageDropper>
             </ImageDropColumn>
-            }
           </Row>
-          <Row>
-            <Button type="submit">Post memory</Button>
-          </Row>
-
+          <Button type="submit">Post memory</Button>
         </NewMemoryForm>
-
       </Wrapper>
     );
   }
@@ -77,49 +86,8 @@ class AddMemory extends Component {
 
 export default observer(AddMemory);
 
-
-const sizes = {
-  giant: 1170,
-  desktop: 992,
-  tablet: 768,
-  phone: 376
-}
-
-// iterate through the sizes and create a media template
-export const media = Object.keys(sizes).reduce((accumulator, label) => {
-  // use em in breakpoints to work properly cross-browser and support users
-  // changing their browsers font-size: https://zellwk.com/blog/media-query-units/
-  const emSize = sizes[label] / 16
-  accumulator[label] = (...args) => css`
-    @media (max-width: ${emSize}em) {
-      ${css(...args)}
-    }
-  `
-  return accumulator
-}, {})
-
-const Label = styled.div`
-`;
-
-const DateInput = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  margin-bottom: 20px;
-  width: 100%;
-`;
-const ImageDropper = styled.div`
-  width: 250px;
-  height: 250px;
-  border: 2px dashed white;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
 const Wrapper = styled.div`
+  box-sizing: border-box;
   background: rgba(0, 0, 0, 0.2);
   color: white;
   height: auto;
@@ -129,10 +97,44 @@ const Wrapper = styled.div`
   margin-top: 10px;
 `;
 
+const Label = styled.label`
+  padding: 5px 0;
+  position: absolute;
+  top: -25px;
+  left: 10px;
+`;
+
+const DateWrapper = styled.div`
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: 20px 0;
+  justify-content: space-between;
+  align-items: center;
+`;
+const DateInput = styled.div`
+  position: relative;
+`;
+const ImageDropper = styled.div`
+  width: 250px;
+  height: 250px;
+  border: 2px dashed white;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ${media.tablet`
+    width: 100%;
+    height: 100px;
+  `};
+`;
+
 const Button = styled.button`
   padding: 10px;
   width: 100%;
-  background-color: ${props => props.redColor ? "red" : "#2A2A2A"};
+  background-color: ${props => (props.redColor ? "red" : "#2A2A2A")};
   color: white;
   border: 1px solid white;
   border-radius: 5px;
@@ -140,56 +142,59 @@ const Button = styled.button`
   transition: 500ms all;
   :hover {
     background-color: white;
-    color: #2A2A2A;
+    color: #2a2a2a;
   }
 `;
-const NewMemoryForm = styled.form `
+const NewMemoryForm = styled.form`
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: space-around;
   width: 100%;
-  ${media.giant`
+  ${media.tablet`
     align-items: center;
-  `}
+  `};
 `;
 
 const Row = styled.div`
+  box-sizing: border-box;
   display: flex;
   width: 100%;
   flex-direction: row;
-  
-  ${media.giant`
+  padding: 20px;
+
+  ${media.tablet`
     flex-direction: column;
     align-items: center;
-  `}
+  `};
 `;
 
 const WideInput = styled.input`
   width: 100%;
   margin-bottom: 20px;
-  padding: 6px 12px;
+  padding: 12px 10px;
   border: 2px solid white;
   border-radius: 3px;
   background-color: transparent;
   color: white;
-  
+
   ::-webkit-input-placeholder {
     color: white;
   }
 `;
 const DescriptionInput = styled.textarea`
   width: 100%;
-  height: 20em;
+  height: 5em;
   margin-bottom: 20px;
-  padding: 6px 12px;
+  padding: 12px 10px;
   resize: vertical;
   border: 2px solid white;
   outline: none;
   border-radius: 3px;
   background-color: transparent;
   color: white;
-  
+
   ::-webkit-input-placeholder {
     color: white;
   }
@@ -200,30 +205,24 @@ const TextColumn = styled.div`
   flex-direction: column;
   flex-basis: 60%;
   align-items: flex-start;
-  ${media.giant`
+  justify-content: space-around;
+  ${media.tablet`
     flex-direction: column;
     align-items: center;
-    flex-basis: 80%;
-    width: 80%;
-  `}
-  justify-content: space-around;
-  padding: 20px;
+    flex-basis: 100%;
+    width: 100%;
+  `} 
 `;
 
 const ImageDropColumn = styled.div`
-display: flex;
-  flex-direction: column;
+  display: flex;
   flex-basis: 40%;
-  align-items: flex-end;
-  justify-content: flex-start;
-  ${media.giant`
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  ${media.tablet`
     flex-direction: column;
     align-items: center;
-    flex-basis: 80%;
-    width: 80%;
-
-  `}
-  justify-content: space-around;
-  padding: 20px;
+    width: 100%;
+  `};
 `;
-

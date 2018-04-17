@@ -1,83 +1,98 @@
-import React from 'react';
-import styled from 'styled-components'
-import { observer } from 'mobx-react/index'
+import React from "react";
+import styled from "styled-components";
+import { media } from "../styles.const";
+import { observer } from "mobx-react/index";
 
-const ToolBar = ({interfaceStore, authStore}) => {
-    console.log("interfaceStore", interfaceStore);
-    return (
-        <ToolBarWrapper>
-            <AlignLeft>
-                <LogoutButton onClick={() => authStore.logoutUser()} >Logout</LogoutButton>
-                <WelcomeTitle>Welcome {authStore.user.displayName}</WelcomeTitle>
-            </AlignLeft>
-            
-            <AlignRight>
-                <ToggleButton style={interfaceStore.showAddMemoryForm ? {background: "rgba(0,0,0,0.5"}: null} 
-                                onClick={() => interfaceStore.toggleAddMemoryForm()} >add memory</ToggleButton>
-                <ToggleButton style={interfaceStore.showCalendarSuggestions ? {background: "rgba(0,0,0,0.5"}: null}  
-                            onClick={() => interfaceStore.toggleCalendarSuggestions()}>toggle calendar</ToggleButton>
-                
-            </AlignRight>
-        </ToolBarWrapper>
-      
-    );
-}
+const ToolBar = ({ interfaceStore, authStore }) => {
+  console.log("interfaceStore", interfaceStore);
+  return (
+    <ToolBarWrapper>
+      <AlignLeft>
+        <ToolbarButton
+          style={
+            interfaceStore.showAddMemoryForm
+              ? { background: "rgba(0,0,0,0.5" }
+              : null
+          }
+          onClick={() => interfaceStore.toggleAddMemoryForm()}
+        >
+          new memory
+        </ToolbarButton>
+        <ToolbarButton
+          style={
+            interfaceStore.showCalendarSuggestions
+              ? { background: "rgba(0,0,0,0.5" }
+              : null
+          }
+          onClick={() => interfaceStore.toggleCalendarSuggestions()}
+        >
+          google suggestions
+        </ToolbarButton>
+      </AlignLeft>
+
+      <AlignRight>
+        <ToolbarButton onClick={() => authStore.logoutUser()}>
+          Logout
+        </ToolbarButton>
+      </AlignRight>
+    </ToolBarWrapper>
+  );
+};
 
 export default observer(ToolBar);
 
-
 const ToolBarWrapper = styled.div`
-background: rgba(0, 0, 0, 0.2);
-color: white;
-height: 50px;
-width: 100%;
-border-radius: 5px;
-margin-top: 10px;
-display: flex;
-align-items: space-between;
-justify-content: space-between;
-padding: 20px 0;
+  background: rgba(0, 0, 0, 0.2);
+  color: white;
+  min-height: 50px;
+  width: 100%;
+  border-radius: 5px;
+  margin-top: 10px;
+  display: flex;
+  align-items: space-between;
+  justify-content: space-between;
+  padding: 20px 0;
+  ${media.tablet`
+flex-direction: column;
+`};
 `;
 
 const AlignLeft = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 0 20px;
-
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 20px;
+  ${media.tablet`
+flex-direction: column;
+`};
 `;
 
 const AlignRight = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 0 20px;
-
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 20px;
+  ${media.tablet`
+flex-direction: column;
+`};
 `;
 
-const WelcomeTitle = styled.p`
-    color: white;
-    font-weight: 300;
-    font-size: 1em;
-`;
+const ToolbarButton = styled.a`
+  padding: 1vw 1.1vw;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid white;
+  background: transparent;
+  color: white;
+  font-size: 1em;
+  margin-left: 15px;
+  transition: background 300ms;
+  cursor: pointer;
+  :hover {
+    background: rgba(255, 255, 255, 0.4);
+  }
 
-const ToggleButton = styled.button`
-    padding: 12px 15px;
-    border: 2px solid white;
-    border-radius: 5px;
-    background: transparent;
-    color: white;
-    margin-left: 15px;
-`;
-
-const LogoutButton = styled.button`
-    padding: 12px 15px;
-    border: 2px solid white;
-    border-radius: 5px;
-    background: transparent;
-    color: white;
-    font-weight: 600;
-    box-shadow: 0 2px 3px #ccc;
-    margin-right: 15px;
-
+  ${media.tablet`
+width: 100%;
+`};
 `;

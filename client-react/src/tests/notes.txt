@@ -1,0 +1,14 @@
+
+
+Jest got code coverage
+
+Snapshot testing 
+
+Assertion testing
+
+Unit testing on components and functions
+    Enzyme is a library that is perfect for testing React components.
+        Allows you to shallowly render single components
+
+Cypress = awesome end-2-end testing (e2e)
+
