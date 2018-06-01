@@ -2,32 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import { media } from "../styles.const";
 import { observer } from "mobx-react/index";
+import GooeySwitch from "./GooeySwitch"
 
 const ToolBar = ({ interfaceStore, authStore }) => {
   console.log("interfaceStore", interfaceStore);
   return (
     <ToolBarWrapper>
       <AlignLeft>
-        <ToolbarButton
-          style={
-            interfaceStore.showAddMemoryForm
-              ? { background: "rgba(0,0,0,0.5" }
-              : null
-          }
-          onClick={() => interfaceStore.toggleAddMemoryForm()}
-        >
-          new memory
-        </ToolbarButton>
-        <ToolbarButton
-          style={
-            interfaceStore.showCalendarSuggestions
-              ? { background: "rgba(0,0,0,0.5" }
-              : null
-          }
-          onClick={() => interfaceStore.toggleCalendarSuggestions()}
-        >
-          google suggestions
-        </ToolbarButton>
+       
+        <GooeySwitch handleToggle={interfaceStore.toggleAddMemoryForm} label="New Memory" />
+        <GooeySwitch handleToggle={interfaceStore.toggleCalendarSuggestions} label="Google Suggestions" />
+
       </AlignLeft>
 
       <AlignRight>
@@ -53,8 +38,8 @@ const ToolBarWrapper = styled.div`
   justify-content: space-between;
   padding: 20px 0;
   ${media.tablet`
-flex-direction: column;
-`};
+    flex-direction: row;
+  `};
 `;
 
 const AlignLeft = styled.div`
@@ -63,7 +48,7 @@ const AlignLeft = styled.div`
   justify-content: flex-start;
   padding: 0 20px;
   ${media.tablet`
-flex-direction: column;
+flex-direction: row;
 `};
 `;
 
@@ -73,7 +58,7 @@ const AlignRight = styled.div`
   justify-content: flex-end;
   padding: 0 20px;
   ${media.tablet`
-flex-direction: column;
+flex-direction: row;
 `};
 `;
 

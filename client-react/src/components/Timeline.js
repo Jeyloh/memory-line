@@ -29,7 +29,7 @@ const TimelineWrapper = ({memories, calendarList, showSuggestions, addIntoForm})
               className="vertical-timeline-element--work "
               style={{backgroundColor: 'rgba(0, 0, 0, 0.5'}}
               date={createDate ? createDate : "start - end"}
-              iconStyle={{ background: 'pink', color: '#fff' }}
+              iconStyle={{ background: '#886AD3', color: '#fff' }}
               icon={SchoolIcon}
             >
               <h3 className="vertical-timeline-element-title">{object.title}</h3>
@@ -50,7 +50,7 @@ const TimelineWrapper = ({memories, calendarList, showSuggestions, addIntoForm})
               key={object.id}
               className="vertical-timeline-element--work suggestion-opaque"
               date={createDate ? createDate : "start - end"}
-              iconStyle={{ background: 'purple', color: '#fff' }}
+              iconStyle={{ background: '#38C5C8', color: '#fff' }}
               icon={WorkIcon}
             >
               <h3 className="vertical-timeline-element-title">{object.summary}</h3>

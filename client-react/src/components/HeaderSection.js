@@ -23,7 +23,8 @@ class HeaderSection extends React.Component {
 export default HeaderSection;
 
 HeaderSection.propTypes = {
-  children: PropTypes.element
+  children: PropTypes.element,
+  loginUser: PropTypes.func.isRequired
 }
 
 

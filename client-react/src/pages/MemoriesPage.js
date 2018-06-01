@@ -67,7 +67,7 @@ class MemoriesPage extends Component {
         <Width>
           <Toolbar interfaceStore={interfaceStore} authStore={authStore} />
            { interfaceStore.showAddMemoryForm
-            && <AddMemory addMemory={this.props.memoryStore.addMemory}
+            && <AddMemory style={{height: 0}} addMemory={this.props.memoryStore.addMemory}
                           interfaceStore={interfaceStore}/> }
           {memoryList
             ? <TimelineWrapper memories={memoryList}
