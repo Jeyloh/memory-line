@@ -38,7 +38,7 @@ app.use(
 
 // Initialize firebase
 app.use((req, res, next) => {
-  req.firebaseServer = firebase.initializeApp;
+  res.firebaseServer = firebase.initializeApp
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",

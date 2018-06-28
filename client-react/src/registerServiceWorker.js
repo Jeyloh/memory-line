@@ -29,6 +29,37 @@ export default function register() {
       return;
     }
 
+    // TODO: Create a click event on element for users offline stored
+    document.querySelector('.memory-post-offline-btn').addEventListener('click', function(event) {
+      event.preventDefault();
+      const id = this.dataset.articleId;
+      caches.open('mysite-article-' + id).then(function(cache) {
+        fetch('/get-article-urls?id=' + id).then(function(response) {
+          // /get-article-urls returns a JSON-encoded array of
+          // resource URLs that a given article depends on
+          return response.json();
+        }).then(function(urls) {
+          cache.addAll(urls);
+        });
+      });
+    });
+
+    // TODO: Make sure the offline html works as intented
+    window.addEventListener('fetch', function(event) {
+      event.respondWith(
+        fetch(event.request).catch(function() {
+          return caches.match(event.request)
+            .then(function(res) {
+              return res || fetch(event.request);
+            }).catch(function() {
+              return caches.match(process.env.PUBLIC_URL + "/offline.html")
+            })
+        })
+      )
+    })
+
+
+
     window.addEventListener('load', () => {
       const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
 

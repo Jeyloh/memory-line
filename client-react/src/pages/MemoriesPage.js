@@ -61,14 +61,14 @@ class MemoriesPage extends Component {
       : null;
     const memoryList = memoryStore.memoryList;
 
+    
     return (
       <Wrapper>
         <Header displayName={authStore.user.displayName}/>
         <Width>
           <Toolbar interfaceStore={interfaceStore} authStore={authStore} />
-           { interfaceStore.showAddMemoryForm
-            && <AddMemory style={{height: 0}} addMemory={this.props.memoryStore.addMemory}
-                          interfaceStore={interfaceStore}/> }
+          <AddMemory addMemory={this.props.memoryStore.addMemory} display={interfaceStore.showAddMemoryForm}
+                          interfaceStore={interfaceStore}/>
           {memoryList
             ? <TimelineWrapper memories={memoryList}
                                calendarList={calendarList}

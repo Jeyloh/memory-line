@@ -10,21 +10,6 @@ const firebaseApp = admin.initializeApp({
 
 const db = admin.database();
 
-// Define the required scopes.
-const scopes = [
-  "https://www.googleapis.com/auth/userinfo.email",
-  "https://www.googleapis.com/auth/firebase.database",
-  "https://www.googleapis.com/auth/calendar"
-];
-
-// Authenticate a JWT client with the service account.
-const jwtClient = new google.google.auth.JWT(
-  serviceAccount.client_email,
-  null,
-  serviceAccount.private_key,
-  scopes
-);
-
 exports = {
   firebaseApp,
   jwtClient,

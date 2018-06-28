@@ -24,10 +24,20 @@ class AddMemory extends Component {
     this.props.interfaceStore.updateAddMemoryForm(name, date);
   };
 
+  
+
   render() {
     const { addMemoryForm } = this.props.interfaceStore;
+        
+    const addMemoryOpacity = {
+      opacity: this.props.display ? '100' : '0',
+      height: this.props.display ? '100%' : 0,
+      transition: this.props.display ? 'all 1000ms' : 'none'
+      
+    }
+
     return (
-      <Wrapper>
+      <Wrapper style={addMemoryOpacity}>
         <NewMemoryForm
           onSubmit={e => {
             this.addMemory(e, addMemoryForm);
