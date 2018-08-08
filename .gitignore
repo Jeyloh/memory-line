@@ -3,6 +3,8 @@
 
 # dependencies
 /node_modules
+/client-react/node_modules
+/server-node/node_modules
 
 # testing
 /coverage
