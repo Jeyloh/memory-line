@@ -27,3 +27,5 @@ export const defaultStyles = {
     defaultbtnPadding: '14px 12px'
 }
 
+export const styledComp = styled.div``;
+

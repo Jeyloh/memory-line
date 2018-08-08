@@ -7,6 +7,7 @@ const FileStore = require("session-file-store")(session);
 const path = require("path");
 const authRouter = require("./routes/auth-router");
 const calendarRouter = require("./routes/calendar-router");
+const photosRouter = require("./routes/photos-router");
 const memoryRouter = require("./routes/memory-router");
 
 const app = express();
@@ -61,6 +62,7 @@ app.use(
 // Setup routes
 app.use("/calendar", calendarRouter);
 app.use("/auth", authRouter);
+app.use("/photos", photosRouter);
 app.use("/memory", memoryRouter);
 
 // Handle other routes

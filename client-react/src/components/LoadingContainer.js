@@ -1,13 +1,12 @@
 import React from "react";
-import styled, {keyframes} from 'styled-components'
-import spray from "../assets/diamond-icon.png";
+import styled from 'styled-components'
 
 const LoadingContainer = () => (
     <Container>
         <div className="gooey-container">
-            <div className="dot dot-1"></div>
-            <div className="dot dot-2"></div>
-            <div className="dot dot-3"></div>
+            <div className="dot dot-1" />
+            <div className="dot dot-2" />
+            <div className="dot dot-3" />
         </div>
 
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
@@ -32,33 +31,4 @@ const Container = styled.div`
     flex-direction: column;
     background-color: transparent;
     padding: 20px;
-`;
-
-
-const rotate360 = keyframes`
-from {
-  transform: rotate(0deg);
-}
-
-to {
-  transform: rotate(360deg);
-}
-`;
-
-const Spinner = styled.div`
-display: inline-text;
-color: white;
-font-size: 32px;
-animation: ${rotate360} 2s linear infinite;
-
-img {
-    width: 100px;
-    height: 100px;
-}
-`;
-
-
-const LoadingText = styled.p`
-    color: white;
-    font-size: 1.8em;
 `;

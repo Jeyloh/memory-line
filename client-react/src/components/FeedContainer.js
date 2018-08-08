@@ -46,6 +46,7 @@ const FeedPostImage = styled.img`
   margin: 5px;
   border: 1px solid white;
 `;
+
 const FeedPost = styled.section`
     min-width: 45%;
     min-height: 5em;
