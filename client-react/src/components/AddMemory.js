@@ -9,7 +9,15 @@ class AddMemory extends Component {
   addMemory = (e, memoryFormObj) => {
     e.preventDefault();
     if (!memoryFormObj) return alert("failed to add");
-    this.props.addMemory(memoryFormObj);
+
+    const memoryWithIsoDate = {
+      title: memoryFormObj.title,
+      description: memoryFormObj.description,
+      startDateTime: memoryFormObj.startDateTime.toISOString(),
+      endDateTime: memoryFormObj.endDateTime.toISOString(),
+      imageSrc: memoryFormObj.imageSrc
+    };
+    this.props.addMemory(memoryWithIsoDate);
   };
 
   handleTextChange = e => {

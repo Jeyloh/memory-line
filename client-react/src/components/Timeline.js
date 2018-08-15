@@ -27,7 +27,6 @@ const TimelineWrapper = ({memories, calendarList, showSuggestions, addIntoForm})
             <VerticalTimelineElement
               key={object.date}
               className="vertical-timeline-element--work "
-              style={{backgroundColor: 'rgba(0, 0, 0, 0.5'}}
               date={createDate ? createDate : "start - end"}
               iconStyle={{ background: '#886AD3', color: '#fff' }}
               icon={SchoolIcon}

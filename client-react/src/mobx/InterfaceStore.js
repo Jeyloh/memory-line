@@ -12,10 +12,10 @@ const memoryFormModel = {
 class InterfaceStore {
   constructor() {
     extendObservable(this, {
-        showAddMemoryForm: false,
-        showDate: false,
-        showCalendarSuggestions: false,
-        addMemoryForm: memoryFormModel,
+      showAddMemoryForm: false,
+      showDate: false,
+      showCalendarSuggestions: false,
+      addMemoryForm: memoryFormModel,
     });
   }
 
@@ -26,6 +26,7 @@ class InterfaceStore {
   toggleAddMemoryForm = () => {
     this.showAddMemoryForm = !this.showAddMemoryForm;
   }
+
   resetForm = () => {
     this.addMemoryForm = memoryFormModel;
   }

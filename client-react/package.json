@@ -2,7 +2,7 @@
   "name": "client-react",
   "version": "1.0.0",
   "description": "",
-  "proxy": "http://localhost:5000/",
+  "proxy": "http://localhost:5000",
   "main": "index.js",
   "scripts": {
     "start": "react-scripts start",
@@ -29,7 +29,8 @@
     "react-scripts": "1.1.1",
     "react-transition-group": "^2.2.1",
     "react-vertical-timeline-component": "^2.0.5",
-    "styled-components": "^3.2.0"
+    "styled-components": "^3.2.0",
+    "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {
     "babel-plugin-transform-decorators": "^6.24.1",

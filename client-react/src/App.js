@@ -6,7 +6,7 @@ import PageRouter from "./containers/PageRouter";
 
 class App extends Component {
 
-  componentWillMount = () => {
+  componentDidMount() {
     if (process.env['NODE_ENV'] !== 'production')
       document.title = `[DEV] Memory L|ne`
   }

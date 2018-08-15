@@ -3,6 +3,7 @@
 }
 
 body {
+  font-family: sans-serif;
   min-height: 100vh;
   background: #886AD3; /* Old browsers */
   background: -moz-linear-gradient(-45deg, #886AD3 0%, #38C5C8 70%, #38C5C8 70%, #38C5C8 100%); /* FF3.6-15 */
@@ -10,19 +11,6 @@ body {
   background: linear-gradient(135deg, #886AD3 0%,#38C5C8 70%,#38C5C8 70%,#886AD3 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#886AD3', endColorstr='#38C5C8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
   padding: 20px;
-}
-
-.suggestion-opaque>div>div {
-  background: rgba(95, 35, 35, 0.5)!important;
-  transition: background 300ms;
-  border: 2px solid white;
-}
-.suggestion-opaque>div>div:hover {
-  background: rgba(255, 255, 255)!important;
-}
-.vertical-timeline-element-date {
-  color: white!important;
-
 }
 
 .react-datepicker-wrapper input {
@@ -63,11 +51,32 @@ body {
   to { transform: rotate(360deg); }
 }
 
+/* REACT TIMELINE */
+
+.suggestion-opaque>div>div {
+  background: rgba(95, 35, 35, 0.5)!important;
+  transition: background 300ms;
+  border: 2px solid white;
+}
+.suggestion-opaque>div>div:hover {
+  background: rgb(255, 255, 255)!important;
+}
+.vertical-timeline-element-content .vertical-timeline-element-date {
+  color: white!important;
+}
+.vertical-timeline-element:nth-child(odd):not(.vertical-timeline-element--right) .vertical-timeline-element-content .vertical-timeline-element-date {
+  left: 140%!important;
+}
+.vertical-timeline-element:nth-child(even):not(.vertical-timeline-element--left) .vertical-timeline-element-content .vertical-timeline-element-date {
+  right: 140%!important;
+
+}
+
 
 /* GOOEY SWITCH */
 
-.gp-header{font-family: georgia; font-size: 40px; color: #886AD3; font-style: italic; text-align: center; margin-top: 25px;}
-.gp-footer{position: fixed; color: rgba(255, 68, 239, 0.425); bottom: 10px; left: 50%; font-family: georgia; font-style: italic; transform: translateX(-50%);}
+.gp-header{ font-size: 40px; color: #886AD3; font-style: italic; text-align: center; margin-top: 25px;}
+.gp-footer{position: fixed; color: rgba(255, 68, 239, 0.425); bottom: 10px; left: 50%; font-style: italic; transform: translateX(-50%);}
 .gp-footer .soc_icons{display: inline-block; color: #886AD3; margin: 0px 10px;}
 
 .gooey-svg {width: 120px; height: 50px;}
@@ -75,9 +84,10 @@ body {
 ::selection {background: transparent;}
 
 
-.switchContainer{filter: url("index.js#gooey");-webkit-filter: url("#gooey");position: absolute;left:50%;top:50%; cursor: pointer; transform: translate(-50%, -50%) scale(2);}
+/*TODO: Removed because of XMLHttpRequest bug*/
+/*.switchContainer{filter: url("./assets/svg/gooey.xhtml#gooey");-webkit-filter: url("#gooey");position: absolute;left:50%;top:50%; cursor: pointer; transform: translate(-50%, -50%) scale(2);}*/
 .switchBg{width:60px;height: 7px;}
-.switchBtn{width: 30px;height: 30px;border-radius: 50%; display: inline-block; position: absolute; left: 0px; top: -12px; transform: translate3d(0,0,0);}
+.switchBtn{width: 30px;height: 30px;border-radius: 50%; display: inline-block; position: absolute; left: 0; top: -12px; transform: translate3d(0,0,0);}
 
 .switchBg, .switchBtn{background: #fff; transition: 300ms all ease;}
 .switchContainer.switchOn .switchBtn, .switchContainer.switchOn .switchBg{background: #886AD3;}
